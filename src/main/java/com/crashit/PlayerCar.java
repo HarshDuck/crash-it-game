@@ -16,21 +16,17 @@ public class PlayerCar extends Car{
             angle-=2.0;
         }
         velocityX=velocityX*0.9;
-        positionX+=velocityX;
-        if(positionX<0){
-            positionX=0;
-            velocityX=0;
-        }
-        if(positionX+width>800){
-            positionX=800-width;
-            velocityX=0;
-        }
-
-
+        positionX+=Math.cos(Math.toRadians(angle))*velocityX;
+        positionY+=Math.sin(Math.toRadians(angle))*velocityX;
+        
     }
     @Override
     void draw(GraphicsContext gc){
+        gc.save();
+        gc.translate(positionX+width/2,positionY+height/2);
+        gc.rotate(angle);
         gc.setFill(Color.RED);
-        gc.fillRect(positionX, positionY, width, height);
+        gc.fillRect(-width/2,-height/2,width,height);
+        gc.restore();
     }
 }

@@ -18,8 +18,13 @@ public class AICar extends Car{
     }
     
     @Override
-    void draw(GraphicsContext gc){
+       void draw(GraphicsContext gc){
+        gc.save();
+        gc.translate(positionX+width/2,positionY+height/2);
+        gc.rotate(angle);
         gc.setFill(Color.BLUE);
-        gc.fillRect(positionX , positionY , width , height);
+        gc.fillRect(-width/2,-height/2,width,height);
+        gc.restore();
+    
     }
 }

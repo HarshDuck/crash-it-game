@@ -20,28 +20,42 @@ public class GameWindow extends Application {
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
+        com.crashit.Stage s1=new com.crashit.Stage(1,20,0.5);
+        //Straight top wall
+        s1.addWall(200,50,600,50);
+        //Straight bottom wall
+        s1.addWall(200,420,600,420);
+        //Leftcurved cap 180 to 360 degree
+        s1.addCurveCap(200,235,185,90,270);
+        //Right curved cap 0 to 180 degree
+        s1.addCurveCap(600,235,185,270,450);
+        s1.playerStartX=350;
+        s1.playerStartY=250;
+        s1.aiStartX=450;
+        s1.aiStartY=250;
+
         //create game objects
         PlayerCar player =new PlayerCar();
         AICar ai = new AICar();
         ai.player=player;
         //set starting position
-        player.positionX=200;
-        player.positionY=400;
-        player.startX=200;
-        player.startY=400;
+        player.positionX=s1.playerStartX;
+        player.positionY=s1.playerStartY;
+        player.startX=s1.playerStartX;
+        player.startY=s1.playerStartY;
         player.width=50;
         player.height=30;
         
-        ai.positionX=550;
-        ai.positionY=400;
-        ai.startX=550;
-        ai.startY=400;
+        ai.positionX=s1.aiStartX;
+        ai.positionY=s1.aiStartY;
+        ai.startX=s1.aiStartX;
+        ai.startY=s1.aiStartY;
         ai.width=50;
         ai.height=30;
         
 
         // Create and start gameloop
-        GameLoop gameLoop = new GameLoop(gc , player , ai);
+        GameLoop gameLoop = new GameLoop(gc , player , ai,s1);
         gameLoop.start();
 
         // setup window
@@ -67,6 +81,7 @@ public class GameWindow extends Application {
         stage.show();
 
     }
+
 
     public static void main(String[] args) {
         launch(args);
